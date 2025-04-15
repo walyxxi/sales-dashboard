@@ -4,7 +4,7 @@ import requests
 import os
 from dotenv import load_dotenv
 from google import genai
-from google.genai.errors import ClientError
+from google.genai.errors import ClientError as GenAIClientError
 
 load_dotenv()
 
@@ -39,8 +39,8 @@ async def get_ai_response(request: AIRequest):
             model="gemini-2.0-flash", contents=request.question
         )
         return AIResponse(response=genai_response.text)
-    except ClientError as e:
-        # Handle specific ClientError from Google Gemini API
+    except GenAIClientError as e:
+        # Handle specific GenAIClientError from Google Gemini API
         raise HTTPException(status_code=400, detail=f"Google Gemini API error: {str(e)}")
     except requests.exceptions.RequestException as e:
         # Handle general request exceptions
