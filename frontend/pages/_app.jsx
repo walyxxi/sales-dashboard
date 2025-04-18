@@ -1,3 +1,5 @@
+import ErrorPopup from "@/components/Error/ErrorPopup";
+import { ErrorProvider } from "@/components/Error/ErrorProvider";
 import "@/styles/globals.css"
 import Head from "next/head";
 import PropTypes from "prop-types";
@@ -8,7 +10,10 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Sales Dashboard</title>
       </Head>
-      <Component {...pageProps} />
+      <ErrorProvider>
+        <ErrorPopup />
+        <Component {...pageProps} />
+      </ErrorProvider>
     </>
   )
 }

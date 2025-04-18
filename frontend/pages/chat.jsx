@@ -2,11 +2,13 @@ import Layout from "@/components/Layout";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { MessageBubble } from "@/components/Chat/MessageBubble";
 import { MessageInput } from "@/components/Chat/MessageInput";
+import { useError } from "@/components/Error/ErrorProvider";
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const { showError } = useError();
 
   const handleSendMessage = async (content) => {
     if (!content.trim()) return;
@@ -23,16 +25,7 @@ export default function Chat() {
     setIsLoading(true);
 
     // Simulate AI response (would be replaced with actual API call)
-
-    const assistantMessage = {
-      id: (Date.now() + 1).toString(),
-      content: await getAIResponse(content),
-      role: "assistant",
-      timestamp: new Date(),
-    };
-
-    setMessages((prev) => [...prev, assistantMessage]);
-    setIsLoading(false);
+    await getAIResponse(content)
   };
 
   // Simple mock responses
@@ -46,12 +39,22 @@ export default function Chat() {
     });
     try {
       if (!response.ok) {
-        throw new Error("Failed to fetch sales data");
+        throw new Error("Failed to fetch ai response data");
       }
       const data = await response.json();
-      return data?.response
+      const assistantMessage = {
+        id: (Date.now() + 1).toString(),
+        content: data?.response,
+        role: "assistant",
+        timestamp: new Date(),
+      };
+  
+      setMessages((prev) => [...prev, assistantMessage]);
+      setIsLoading(false);
     } catch (error) {
-      console.log("Error fetching sales data:", error);
+      showError("Error fetching ai response data", error);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
