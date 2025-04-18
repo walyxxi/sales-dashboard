@@ -58,7 +58,7 @@ A full-stack project for managing and displaying sales data, built using **FastA
 2. **Backend Setup**
 
    Before setup for backend, please find google API key for gemini AI integration.
-   Visit this link to get your API key `https://aistudio.google.com/apikey`.
+   Visit [Google AI Studio](https://aistudio.google.com/apikey) to get your API key.
    Copy the API key and paste into `.env` file.
    ```bash
    cd backend
