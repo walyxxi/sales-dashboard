@@ -12,7 +12,8 @@ router = APIRouter(prefix="/api/sales", tags=["Sales"])
 def get_sales_representatives(
     name: Optional[str] = Query(None, description="Filter by sales representative name"),
     status: Optional[str] = Query(None, description="Filter by deal status (e.g., 'In Progress', 'Closed Won')"),
-    client_name: Optional[str] = Query(None, description="Filter by client name")
+    client_name: Optional[str] = Query(None, description="Filter by client name"),
+    region: Optional[str] = Query(None, description="Filter by sales region"),
 ):
     """
     Fetch and filter sales representatives and their deals based on query parameters.
@@ -37,6 +38,10 @@ def get_sales_representatives(
             for rep in sales_data:
                 rep["clients"] = [client for client in rep["clients"] if client_name.lower() in client["name"].lower()]
                 sales_data = [rep for rep in sales_data if rep["clients"]]
+        
+        # Filter by sales region
+        if region:
+            sales_data = [rep for rep in sales_data if region.lower() in rep["region"].lower()]
 
         return sales_data
     except Exception as e:
