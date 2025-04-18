@@ -89,13 +89,6 @@ cd backend
 pytest tests
 ```
 
-### Frontend Tests
-Run unit tests for the frontend using `Jest`:
-```bash
-cd frontend
-npm test
-```
-
 ---
 
 ## License
