@@ -16,14 +16,16 @@ A full-stack project for managing and displaying sales data, built using **FastA
 ## Key Components of the Project Structure
 
 ### 1. **Backend**:
-   - **`app/main.py`**: Entry point for the FastAPI backend.
-   - **`app/routes/sales.py`**: Handles the `/sales/` API endpoint with filtering functionality.
-   - **`app/schemas.py`**: Defines Pydantic models for request/response validation.
-   - **`app/dummyData.json`**: Contains the nested JSON structure for sales data.
+   - **`main.py`**: Entry point for the FastAPI backend.
+   - **`routes/sales.py`**: Handles the `/sales` API endpoint with filtering functionality.
+   - **`routes/ai.py`**: Handles the `/ai` API endpoint.
+   - **`schemas`**: Defines Pydantic models for request/response validation.
+   - **`dummyData.json`**: Contains the nested JSON structure for sales data.
    - **`tests/test_sales.py`**: Unit tests for `/sales` API functionality using `pytest`.
    - **`tests/test_ai.py`**: Unit tests for `/ai` API functionality using `pytest`.
 
 ### 2. **Frontend**:
+   - **`components/Layout`**: A route layout component.
    - **`components/ui`**: A reusable UI component.
    - **`pages/index.js`**: The main dashboard page displaying sales representatives and their deals.
    - **`pages/chat.js`**: The AI Chat page.
